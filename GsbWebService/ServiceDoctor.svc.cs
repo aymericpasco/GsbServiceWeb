@@ -15,7 +15,17 @@ namespace GsbWebService
 
         public IList<DoctorEntity> ConsultAllDoctors()
         {
-            return doctorRepository.Select();
+            return doctorRepository.SelectAll();
+        }
+
+        public IList<DoctorEntity> ConsultDoctorsByDepartment(int department)
+        {
+            return doctorRepository.SelectByDepartment(department);
+        }
+
+        public IList<DoctorEntity> ConsultDoctorsByLastname(String lastname)
+        {
+            return doctorRepository.SelectByLastname(lastname);
         }
     }
 }

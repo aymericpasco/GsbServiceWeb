@@ -24,13 +24,67 @@ namespace GsbWebService
             context.SaveChanges();
         }
 
-        public IList<DoctorEntity> Select()
+        public IList<DoctorEntity> SelectAll()
         {
             gsbEntities context = new gsbEntities();
 
             IList<DoctorEntity> listDoctorsEntity = new List<DoctorEntity>();
 
-            IList<doctors> docs = (from n in context.doctors select n).ToList();
+            IList<doctors> docs = (from d in context.doctors select d).ToList();
+
+            DoctorEntity doctorEntity = null;
+
+            foreach (doctors doc in docs)
+            {
+                doctorEntity = new DoctorEntity();
+                doctorEntity.Id = doc.id;
+                doctorEntity.FirstName = doc.firstname;
+                doctorEntity.LastName = doc.lastname;
+                doctorEntity.Address = doc.address;
+                doctorEntity.Phone = doc.phone;
+                doctorEntity.Specialty = doc.specialty;
+                doctorEntity.Department = doc.department;
+
+                listDoctorsEntity.Add(doctorEntity);
+            }
+
+            return listDoctorsEntity;
+        }
+
+        public IList<DoctorEntity> SelectByDepartment(int department)
+        {
+            gsbEntities context = new gsbEntities();
+
+            IList<DoctorEntity> listDoctorsEntity = new List<DoctorEntity>();
+
+            IList<doctors> docs = (from d in context.doctors where d.department == department select d).ToList();
+
+            DoctorEntity doctorEntity = null;
+
+            foreach (doctors doc in docs)
+            {
+                doctorEntity = new DoctorEntity();
+                doctorEntity.Id = doc.id;
+                doctorEntity.FirstName = doc.firstname;
+                doctorEntity.LastName = doc.lastname;
+                doctorEntity.Address = doc.address;
+                doctorEntity.Phone = doc.phone;
+                doctorEntity.Specialty = doc.specialty;
+                doctorEntity.Department = doc.department;
+
+                listDoctorsEntity.Add(doctorEntity);
+            }
+
+            return listDoctorsEntity;
+        }
+
+        public IList<DoctorEntity> SelectByLastname(String lastname)
+        {
+            gsbEntities context = new gsbEntities();
+
+            IList<DoctorEntity> listDoctorsEntity = new List<DoctorEntity>();
+
+            IList<doctors> docs = (from d in context.doctors where d.lastname == lastname select d).ToList();
 
             DoctorEntity doctorEntity = null;
 

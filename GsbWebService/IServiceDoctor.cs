@@ -18,5 +18,21 @@ namespace GsbWebService
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "ConsultAllDoctors")]
         IList<DoctorEntity> ConsultAllDoctors();
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "ConsultDoctorsByDepartment?dep={department}")]
+        IList<DoctorEntity> ConsultDoctorsByDepartment(int department);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "ConsultDoctorsByLastname?name={lastname}")]
+        IList<DoctorEntity> ConsultDoctorsByLastname(String lastname);
     }
 }
